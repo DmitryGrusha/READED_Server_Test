@@ -6,4 +6,7 @@ from user.models import User
 
 @csrf_exempt
 def get_user(request):
-    return JsonResponse({'type': 'ERROR', 'answer': 'Method not allowed.'})
+    if request.method == 'GET':
+        return JsonResponse({'type': 'SUCCESS', 'answer': ''})
+    else:
+        return JsonResponse({'type': 'ERROR', 'answer': 'Method not allowed.'})
