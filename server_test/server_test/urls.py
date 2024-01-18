@@ -14,13 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
 
 from registration.views import registration_request
 from user.views import get_user
+from user.views import register_user
+
 from elevenlabs.views import audio_request
 
 urlpatterns = [
@@ -30,8 +32,11 @@ urlpatterns = [
     path('registration/', registration_request, name='registration'),
 
     # user
-    path('getUser', get_user, name='getUser'),
+    path('getUser', get_user),
+    path('registerUser', register_user),
 
     # elevenlabs audio
     path('getAudio', audio_request, name='getAudio')
+
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
